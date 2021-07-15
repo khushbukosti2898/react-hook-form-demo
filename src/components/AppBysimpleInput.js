@@ -2,12 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Card, CardBody, CardTitle, Col, Form, Row, Button, Input } from "reactstrap";
 
-function AppBySimpleInput() {
+const AppBySimpleInput = () => {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
 
   // your form submit function which will invoke after successful validation
@@ -15,21 +15,21 @@ function AppBySimpleInput() {
     alert(JSON.stringify(data));
   };
 
-  console.log(watch()); // watch input value by passing the name of it like watch("email")
-  console.log(errors); // error object
+  console.log('watch()', watch()); // watch input value by passing the name of it like watch("email")
+  console.log('errors', errors); // error object
 
   return (
-    <div className="mt-5">
+    <div className="mt-2">
       <Row className="justify-content-center align-items-center">
-        <Col sm="12" md={7}>
+        <Col sm="12" md={9}>
           <Card className="shadow-lg border-0 p-3">
             <CardBody>
-              <CardTitle tag="h4" className="text-center mb-4">
+              <CardTitle tag="h5" className="text-center mb-4">
                 Without controller
               </CardTitle>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-2">
-                  <label>Email</label>
+                  <label>Email <span className="text-danger">*</span></label>
                   <Input
                     placeholder="Enter email"
                     {...register("email", {
@@ -44,7 +44,7 @@ function AppBySimpleInput() {
                 </div>
 
                 <div className="mt-2">
-                  <label>Password</label>
+                  <label>Password <span className="text-danger">*</span></label>
                   <Input
                     type="password"
                     placeholder="Enter password"
@@ -59,18 +59,7 @@ function AppBySimpleInput() {
                   )}
                 </div>
 
-                <div className="mt-2">
-                  <label>
-                    <Input
-                      type="checkbox"
-                      {...register('rememberMe')}
-                      name="rememberMe"
-                      label="Remember me"
-                    />
-                    Remember me
-                  </label>
-                </div>
-                <Button color="primary mt-2">Login</Button>
+                <Button color="primary mt-4">Submit</Button>
               </Form>
             </CardBody>
           </Card>

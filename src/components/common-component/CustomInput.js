@@ -2,9 +2,7 @@ import React from 'react';
 import {
   Input,
   Label,
-  InputGroupAddon,
   InputGroup,
-  InputGroupText,
 } from 'reactstrap';
 import { Controller } from 'react-hook-form';
 
@@ -17,16 +15,13 @@ const CustomInput = ({
   isRequired,
   error,
   disabled,
-  labelClassName,
   control,
   rules,
-  prepend,
-  append,
   defaultValue,
 }) => (
   <div className="mt-2">
     {label && (
-      <Label className={labelClassName} for={name}>
+      <Label for={name}>
         {label}
         {isRequired && <span style={{ color: 'red' }}> * </span>}
       </Label>
@@ -38,27 +33,15 @@ const CustomInput = ({
         rules={rules}
         defaultValue={defaultValue}
         render={({ field }) => (
-          <>
-            {prepend && (
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>{prepend}</InputGroupText>
-              </InputGroupAddon>
-            )}
-            <Input
-              id={name}
-              type={type}
-              name={name}
-              className={className}
-              placeholder={placeholder}
-              disabled={disabled}
-              {...field}
-            />
-            {append && (
-              <InputGroupAddon addonType="append">
-                <InputGroupText>{append}</InputGroupText>
-              </InputGroupAddon>
-            )}
-          </>
+          <Input
+            id={name}
+            type={type}
+            name={name}
+            className={className}
+            placeholder={placeholder}
+            disabled={disabled}
+            {...field}
+          />
         )}
       />
     </InputGroup>

@@ -1,46 +1,47 @@
 import React from 'react';
-import { CustomInput, Label } from 'reactstrap';
+import { FormGroup, Input, Label } from 'reactstrap';
 import { Controller } from 'react-hook-form';
 
-const CheckBox = React.forwardRef(({
+const TextArea = ({
   name,
+  placeholder,
   className,
   label,
   isRequired,
   error,
   disabled,
   labelClassName,
-  formGroupLable,
+  rows,
   control,
   rules,
-  defaultValue,
-}, ref) => (
-  <div className="mt-2">
-    {formGroupLable && (
+}) => (
+  <FormGroup className="mt-2">
+    {label && (
       <Label className={labelClassName} for={name}>
-        {formGroupLable}
+        {label}
         {isRequired && <span style={{ color: 'red' }}> * </span>}
       </Label>
     )}
+
     <Controller
       control={control}
       name={name}
       rules={rules}
-      defaultValue={defaultValue}
       render={({ field }) => (
-        <CustomInput
-          type="checkbox"
+        <Input
           id={name}
-          label={label}
+          type="textarea"
           name={name}
           className={className}
+          placeholder={placeholder}
+          rows={rows}
           disabled={disabled}
           {...field}
-          ref={ref}
         />
       )}
     />
-    {error && error.message && <p className="form-error">{error.message}</p>}
-  </div>
-),);
-export default CheckBox;
+    {error && <p className="text-danger">{error.message}</p>}
+  </FormGroup>
+);
+
+export default TextArea;
